@@ -107,6 +107,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "558753922013-hce6kr63u125b490hjqhvufq7a9h552c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beaconpop.pyeongchang",
+            "certificate_hash": "3f4d51be438b07723761b28674e431dfa4f4e010"
+          }
+        },
+        {
           "client_id": "558753922013-7423sm0egiacj0vo99305scog68er5vq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
