@@ -14,6 +14,10 @@
     <string name="ble_not_supported">BLE is not supported</string>
     <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
 
+    <string name="user_name">UserName</string>
+    <string name="user_email">UserEmail@gmail.com</string>
+    <string name="no_ble">등록된 비콘이 없습니다.</string>
+
     <string name="uuid">UUID</string>
     <string name="bd_name">BD Name</string>
     <string name="bd_address">BD Address</string>

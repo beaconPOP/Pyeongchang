@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_additem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay">
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp">
+
+        <Switch
+            android:id="@+id/scan_on_off"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView11"
+            android:layout_alignBottom="@+id/textView11"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="18dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:text="분실물 방지 사용여부"
+            android:textSize="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/common_google_signin_btn_text_dark_disabled" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/scan_period"
+            android:layout_alignBottom="@+id/scan_period"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="19dp"
+            android:text="초"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/scan_period"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/textView14"
+            android:drawableLeft="@drawable/ic_create"
+            android:ems="10"
+            android:inputType="time" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="17dp"
+            android:text="스캔주기 설정"
+            android:textSize="20dp"
+            android:layout_alignBaseline="@+id/scan_period"
+            android:layout_alignBottom="@+id/scan_period"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/common_google_signin_btn_text_dark_disabled" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <Switch
+            android:id="@+id/GpsBotton"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="17dp"
+            android:text="GPS 사용여부"
+            android:textSize="20dp"
+            android:layout_alignTop="@+id/GpsBotton"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/common_google_signin_btn_text_dark_disabled" />
+
+</LinearLayout>
