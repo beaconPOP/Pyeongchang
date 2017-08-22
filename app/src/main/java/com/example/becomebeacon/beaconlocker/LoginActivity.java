@@ -27,6 +27,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import com.zerobin.www.beacon_client.*;
+
+
+
 public class LoginActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener{
@@ -203,7 +207,7 @@ public class LoginActivity extends AppCompatActivity implements
     private void updateUI(FirebaseUser user) {
         try {
             if (user != null) {
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this,com.zerobin.www.beacon_client.MainActivity.class);
                 startActivity(intent);
                 finish();
 
