@@ -1,6 +1,5 @@
 package com.example.becomebeacon.beaconlocker;
 
-import java.util.Comparator;
 import java.util.Date;
 
 /**

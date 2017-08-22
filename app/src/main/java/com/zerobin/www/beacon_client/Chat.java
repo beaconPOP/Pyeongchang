@@ -1,5 +1,7 @@
 package com.zerobin.www.beacon_client;
 
+import com.beaconpop.pyeongchang.R;
+
 /**
  * Created by seonyeong on 2017-05-05.
  */

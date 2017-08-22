@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zerobin.www.beacon_client.R;
+import com.beaconpop.pyeongchang.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

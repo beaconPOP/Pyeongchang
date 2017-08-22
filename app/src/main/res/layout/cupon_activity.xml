@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <LinearLayout
-    tools:context="com.zerobin.www.beacon_client.ComunicationActivity"
+<LinearLayout tools:context="com.zerobin.www.beacon_client.ComunicationActivity"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
 

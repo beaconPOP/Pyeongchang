@@ -1,7 +1,5 @@
 package com.zerobin.www.beacon_client;
 
-import android.util.Log;
-
 /**
  * Created by changsu on 2015-03-28.
  * 각종 연산을 위한 class 임

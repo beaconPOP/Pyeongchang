@@ -12,7 +12,6 @@ import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,13 +19,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.beaconpop.pyeongchang.R;
 import com.example.becomebeacon.beaconlocker.pictureserver.Callback;
 import com.example.becomebeacon.beaconlocker.pictureserver.PictureDelete;
 import com.example.becomebeacon.beaconlocker.pictureserver.PicturePopup;
 import com.example.becomebeacon.beaconlocker.pictureserver.PictureUpload;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-import com.zerobin.www.beacon_client.R;
 
 import java.io.IOException;
 

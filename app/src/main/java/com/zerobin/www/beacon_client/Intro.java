@@ -3,8 +3,9 @@ package com.zerobin.www.beacon_client;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
+
+import com.beaconpop.pyeongchang.R;
 
 /**
  * Created by Byun YB on 2017-05-23.

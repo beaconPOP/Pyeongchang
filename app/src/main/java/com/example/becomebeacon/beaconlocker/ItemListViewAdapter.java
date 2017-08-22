@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.zerobin.www.beacon_client.R;
+import com.beaconpop.pyeongchang.R;
 
 import java.util.List;
 

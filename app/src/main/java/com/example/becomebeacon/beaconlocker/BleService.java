@@ -14,15 +14,14 @@ import android.location.LocationManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
 import android.widget.Toast;
 
+import com.beaconpop.pyeongchang.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.zerobin.www.beacon_client.R;
 
 import java.util.ArrayList;
 

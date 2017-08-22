@@ -1,9 +1,5 @@
 package com.zerobin.www.beacon_client;
 
-import android.graphics.Bitmap;
-
-import com.google.firebase.database.Exclude;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,5 @@
 package com.example.becomebeacon.beaconlocker;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.beaconpop.pyeongchang.R;
 import com.example.becomebeacon.beaconlocker.pictureserver.Callback;
 import com.example.becomebeacon.beaconlocker.pictureserver.PicturePopup;
 import com.example.becomebeacon.beaconlocker.pictureserver.PictureUpload;
@@ -28,7 +30,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.zerobin.www.beacon_client.R;
 
 import java.io.IOException;
 

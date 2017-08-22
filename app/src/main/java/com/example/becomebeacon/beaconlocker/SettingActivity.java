@@ -8,13 +8,12 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zerobin.www.beacon_client.R;
+import com.beaconpop.pyeongchang.R;
 
 /**
  * Created by 王楠 on 2017/5/13.

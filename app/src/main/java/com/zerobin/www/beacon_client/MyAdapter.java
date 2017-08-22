@@ -8,9 +8,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.beaconpop.pyeongchang.R;
+
 import java.util.List;
 
-import static com.zerobin.www.beacon_client.R.layout.my_text_view;
+import static com.beaconpop.pyeongchang.R.layout.my_text_view;
+
 
 /**
      * Created by seonyeong on 2017-05-05.

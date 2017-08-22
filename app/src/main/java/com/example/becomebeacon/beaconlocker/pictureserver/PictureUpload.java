@@ -2,7 +2,6 @@ package com.example.becomebeacon.beaconlocker.pictureserver;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.becomebeacon.beaconlocker.BleDeviceInfo;
 import com.google.android.gms.tasks.OnFailureListener;
