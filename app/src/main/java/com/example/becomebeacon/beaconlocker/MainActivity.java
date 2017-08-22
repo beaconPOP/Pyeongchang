@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity
 
         try {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main_lostitem);
+            setContentView(R.layout.activity_main_slide);
 
             mainProgressDialog = new ProgressDialog(this);
             mainProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
