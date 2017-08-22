@@ -1,5 +1,8 @@
 package com.example.becomebeacon.beaconlocker;
 
+import android.app.Service;
+import android.content.Intent;
+
 /**
  * Created by 함상혁입니다 on 2017-04-27.
  */
@@ -21,4 +24,6 @@ public class Values {
     public static boolean useGPS;
     public static double latitude;
     public static double longitude;
+
+    public static Intent bleService;
 }

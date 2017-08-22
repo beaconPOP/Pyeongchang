@@ -397,6 +397,8 @@ public class MainActivity extends AppCompatActivity
             bleService = new Intent(this, BleService.class);
             startService(bleService);
 
+            Values.bleService=bleService;
+
             if (Values.useBLE)
                 mBleScan.checkBluetooth();
             //이미지 파일 썩션
@@ -545,16 +547,24 @@ public class MainActivity extends AppCompatActivity
 
             } else if (id == R.id.nav_logout) {
 
+// 이전버전 로그인
+//                //Memory 비우기
+//                mHandler.removeMessages(0);
+//                mTimeOut.removeMessages(0);
+//                stopBleService();
+//                PictureList.clear();
+//
+//                //새 인텐트 불러오기
+//                signOut();
+//                Intent intent = new Intent(this, LoginActivity.class);
+//                startActivity(intent);
+//                finish();
 
-                //Memory 비우기
                 mHandler.removeMessages(0);
                 mTimeOut.removeMessages(0);
-                stopBleService();
                 PictureList.clear();
 
-                //새 인텐트 불러오기
-                signOut();
-                Intent intent = new Intent(this, LoginActivity.class);
+                Intent intent = new Intent(this, com.zerobin.www.beacon_client.MainActivity.class);
                 startActivity(intent);
                 finish();
 

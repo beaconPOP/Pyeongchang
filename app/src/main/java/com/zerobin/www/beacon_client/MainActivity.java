@@ -254,6 +254,7 @@ public class MainActivity extends AppCompatActivity
 //            firebaseAuth.signOut();
 
             signOut();
+            stopBleService();
             Intent intent = new Intent(this, com.example.becomebeacon.beaconlocker.LoginActivity.class);
             startActivity(intent);
         }
@@ -261,6 +262,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void stopBleService() {
+        try {
+            if(com.example.becomebeacon.beaconlocker.Values.bleService!=null)
+                stopService(com.example.becomebeacon.beaconlocker.Values.bleService);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            Toast.makeText(getApplicationContext(), "오류가 발생했습니다. 관리자에게 문의하세요\n오류코드 : 50504", Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 
     private void signOut() {
