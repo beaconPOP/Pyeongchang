@@ -11,9 +11,10 @@ public class Chat {
     public String Content;
     public String UserID;
     public String Img_num;
-    public int img1=R.drawable.a1;
-    public int img2=R.drawable.a3;
-    public int img3=R.drawable.a5;
+    public int img1=R.drawable.imo1;
+    public int img2=R.drawable.imo2;
+    public int img3=R.drawable.imo3;
+    public int img4 = R.drawable.imo4;
 
              public Chat()
              {

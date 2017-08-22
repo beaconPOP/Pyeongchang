@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity
         userUid = sharedPreferences.getString("userUid", "UserUid를 가져오지 못했습니다.");
         userEmail = sharedPreferences.getString("userEmail", "UserEmail를 가져오지 못했습니다.");
 
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("User").child(userUid);
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("User").child(userUid);//////////////////
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -38,7 +38,7 @@ public class ComunicationActivity extends AppCompatActivity {
     //
     private StorageReference mStorageRef;
     //
-    int [] ImageId = { R.drawable.a1, R.drawable.a3, R.drawable.a5 };
+    int [] ImageId = { R.drawable.imo1, R.drawable.imo2, R.drawable.imo3, R.drawable.imo4 };
     ImageView iv;
 
     TextView ID;
@@ -87,7 +87,7 @@ public class ComunicationActivity extends AppCompatActivity {
         btnSend=(Button) findViewById(R.id.btnSend);
 
         iv=(ImageView) findViewById(R.id.image);
-        iv.setImageResource(R.drawable.a1);
+        iv.setImageResource(R.drawable.imo1);
         ID.setText(userEmail);
 
         iv.setOnClickListener(new View.OnClickListener() {
