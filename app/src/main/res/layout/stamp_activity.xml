@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/stampbook1"
+
+
+    android:orientation="vertical"
+    tools:context="com.zerobin.www.beacon_client.StampActivity">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.18" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="0.82">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/stamp2"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/stamp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/stamp1"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="47dp"
+                android:layout_weight="1"
+                android:src="@drawable/stamp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/stamp4"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="42dp"
+                android:layout_weight="1"
+                android:src="@drawable/stamp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/stamp3"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="43dp"
+                android:layout_weight="1"
+                android:src="@drawable/stamp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.33"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/stamp6"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+
+                android:layout_alignBottom="@+id/stamp5"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="39dp"
+                android:layout_weight="1"
+                android:src="@drawable/stamp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/stamp5"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="43dp"
+                android:layout_weight="1"
+                android:src="@drawable/stamp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
