@@ -234,9 +234,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_coupon) {
                 Intent intent = new Intent(this, CuponActivity.class);
                 startActivity(intent);
-            } else if (id == R.id.nav_welcoom) {
-//                Intent intent = new Intent(this, IntroduceMarket.class);
-//                startActivity(intent);
+            } else if (id == R.id.nav_prevention) {
+                Intent intent = new Intent(this, com.example.becomebeacon.beaconlocker.MainActivity.class);
+                startActivity(intent);
 
             } else if(id == R.id.background_on){  //백그라운드 기능 활성화 시 비컨 스캔 Service 시작
 //            startService(Service);
