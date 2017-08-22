@@ -2,6 +2,7 @@ package com.example.becomebeacon.beaconlocker;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -207,6 +208,13 @@ public class LoginActivity extends AppCompatActivity implements
     private void updateUI(FirebaseUser user) {
         try {
             if (user != null) {
+
+                SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("userUid", getUser().getUid());
+                editor.putString("userEmail", getUser().getEmail());
+                editor.apply();
+
                 Intent intent = new Intent(this,com.zerobin.www.beacon_client.MainActivity.class);
                 startActivity(intent);
                 finish();
