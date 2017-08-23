@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.beaconpop.pyeongchang.R;
 
+import static com.example.becomebeacon.beaconlocker.Values.lostItemToggle;
+
 /**
  * Created by 王楠 on 2017/5/13.
  */

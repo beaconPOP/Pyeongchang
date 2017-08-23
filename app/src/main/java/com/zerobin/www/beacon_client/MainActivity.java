@@ -45,6 +45,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.example.becomebeacon.beaconlocker.BleService;
 
+import static com.example.becomebeacon.beaconlocker.Values.lostItemToggle;
+import static com.example.becomebeacon.beaconlocker.Values.mainServicesToggle;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     BeaconScanService beaconScanService; //Service 객체
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity
     FirebaseUser mUser;
     GoogleApiClient mGoogleApiClient;
     Context mContext;
+    Intent Service;
 
 
     protected void onStart() {
@@ -103,6 +107,8 @@ public class MainActivity extends AppCompatActivity
 
         initBluetoothAdapter();
 
+        Service = new Intent(this, BeaconScanService.class);
+
         //블루투스가 꺼져 있을 때 키도록 요청하는 코드
         if(!mBluetoothAdapter.isEnabled())
         {
@@ -145,21 +151,32 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.menu_toggle, menu);
         Switch toggleSwitch = (Switch)menu.findItem(R.id.action_switch_item).getActionView().findViewById(R.id.action_switch);
 
+        if(mainServicesToggle) {
+            toggleSwitch.setChecked(true);
+        } else {
+            toggleSwitch.setChecked(false);
+        }
+
         //Switch
         toggleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     //TODO:Checked 되면 서비스 온
-
+                    startService(Service);
                     Values.bleService = new Intent(mContext, BleService.class);
                     startService(Values.bleService);
-                    Toast.makeText(getApplicationContext(), "비컨 탐색을 시작합니다.", Toast.LENGTH_SHORT).show();
+                    mainServicesToggle = true;
+                    lostItemToggle = true;
+                    Toast.makeText(getApplicationContext(), "전체 서비스를 시작합니다.", Toast.LENGTH_SHORT).show();
 
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
                     stopBleService();
+                    stopService(Service);
+                    mainServicesToggle = false;
+                    lostItemToggle = false;
+                    Toast.makeText(getApplicationContext(),"전체 서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -257,7 +274,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         //Beacon Scan Service Intent
-        Intent  Service = new Intent(this, BeaconScanService.class);
+        Service = new Intent(this, BeaconScanService.class);
 
         if (id == R.id.nav_map) {
             Intent intent = new Intent(this, GoogleMap.class);
@@ -275,18 +292,20 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(this, com.example.becomebeacon.beaconlocker.MainActivity.class);
                 startActivity(intent);
 
-            } else if(id == R.id.background_on){  //백그라운드 기능 활성화 시 비컨 스캔 Service 시작
-//            startService(Service);
-//            bindService(Service, //Service Intent 객체
-//                    connection, //서비스와 연결에 대한 정의
-//                    Context.BIND_AUTO_CREATE); //flag
-                startService(Service);
-                Log.i("main액티비티", "서비스 시작");
-        }else if(id == R.id.background_off){ //백그라운드 기능 비 활성화 시 비컨 스캔 Service 시작
-           // stopService(Service);
-            //unbindService(connection); //Service 종료
-            stopService(Service);
-        }else if(id == R.id.logout){
+            }
+//            else if(id == R.id.background_on){  //백그라운드 기능 활성화 시 비컨 스캔 Service 시작
+////            startService(Service);
+////            bindService(Service, //Service Intent 객체
+////                    connection, //서비스와 연결에 대한 정의
+////                    Context.BIND_AUTO_CREATE); //flag
+//                startService(Service);
+//                Log.i("main액티비티", "서비스 시작");
+//        }else if(id == R.id.background_off){ //백그라운드 기능 비 활성화 시 비컨 스캔 Service 시작
+//           // stopService(Service);
+//            //unbindService(connection); //Service 종료
+//            stopService(Service);
+//        }
+        else if(id == R.id.logout){
 //            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 //            firebaseAuth.signOut();
 
