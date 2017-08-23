@@ -1,6 +1,7 @@
 package com.example.becomebeacon.beaconlocker;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -395,8 +396,14 @@ public class MainActivity extends AppCompatActivity
 
 
             mBleScan = new BluetoothScan(this, mBleDeviceListAdapter, mBeaconsListAdapter);
+
             bleService = new Intent(this, BleService.class);
-            startService(bleService);
+
+            if(!isServiceRunningCheck()) {
+                startService(bleService);
+                Toast.makeText(getApplicationContext(), "비컨 탐색을 시작합니다.", Toast.LENGTH_SHORT).show();
+            }
+
 
             Values.bleService=bleService;
 
@@ -416,11 +423,14 @@ public class MainActivity extends AppCompatActivity
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     //TODO:Checked 되면 서비스 온
-                    Toast.makeText(getApplicationContext(),"비컨 탐색을 시작합니다.",Toast.LENGTH_SHORT).show();
+                    if(!isServiceRunningCheck()) {
+                        startService(bleService);
+                        Toast.makeText(getApplicationContext(), "비컨 탐색을 시작합니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
-                    //TODO:UnChecked 되면 서비스 오프
                     Toast.makeText(getApplicationContext(),"서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
+                    stopBleService();
                 }
             }
         });
@@ -428,9 +438,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void setPoint(int p) {
-        mPoint.setText(BleService.myPoint + "");
-    }
 
     private void initUI() {
         try {
@@ -445,6 +452,17 @@ public class MainActivity extends AppCompatActivity
             finish();
         }
     }
+
+    public boolean isServiceRunningCheck() {
+        ActivityManager manager = (ActivityManager) this.getSystemService(Activity.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if ("com.example.becomebeacon.beaconlocker.BleService".equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public void stopBleService() {
         try {

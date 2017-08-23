@@ -1,5 +1,7 @@
 package com.zerobin.www.beacon_client;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -41,6 +43,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.example.becomebeacon.beaconlocker.BleService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     GoogleApiClient mGoogleApiClient;
+    Context mContext;
 
 
     protected void onStart() {
@@ -82,6 +86,8 @@ public class MainActivity extends AppCompatActivity
         checkPermission();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mContext=this;
 
         mAuth = LoginActivity.getAuth();
         mUser = LoginActivity.getUser();
@@ -134,6 +140,16 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    public boolean isServiceRunningCheck() {
+        ActivityManager manager = (ActivityManager) this.getSystemService(Activity.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if ("com.example.becomebeacon.beaconlocker.BleService".equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toggle, menu);
@@ -145,11 +161,15 @@ public class MainActivity extends AppCompatActivity
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     //TODO:Checked 되면 서비스 온
-                    Toast.makeText(getApplicationContext(),"비컨 탐색을 시작합니다.",Toast.LENGTH_SHORT).show();
+                    if(!isServiceRunningCheck()) {
+                        Values.bleService = new Intent(mContext, BleService.class);
+                        startService(Values.bleService);
+                        Toast.makeText(getApplicationContext(), "비컨 탐색을 시작합니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
-                    //TODO:UnChecked 되면 서비스 오프
                     Toast.makeText(getApplicationContext(),"서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
+                    stopBleService();
                 }
             }
         });

@@ -36,7 +36,6 @@ public class BleService extends Service {
     private String TAG="BLESERVICE";
     private BluetoothScan mBleScan;
     private Location loc;
-    public static int myPoint ;
     private String myPointKey=null;
 
     private String FIND_OTHERS_NOTI;
@@ -89,7 +88,6 @@ public class BleService extends Service {
         mScan=false;
         mHandler.sendEmptyMessage(0);
         mTimeOut.sendEmptyMessage(0);
-        myPoint=0;
 
         mDatabase = FirebaseDatabase.getInstance();
 
@@ -263,8 +261,6 @@ public class BleService extends Service {
 
         super.onDestroy();
 
-        if(myPointKey!=null)
-            messageInfoRef.child(myPointKey).child("point").setValue(myPoint);
 
     }
 
