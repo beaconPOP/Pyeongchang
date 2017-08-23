@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity
                     //계정의 acct.getId()를 key값으로 사용함
                     User userInfo = new User(userEmail, userUid);
             //      userInfo.coupon.add("coupon1");
-                    userInfo.coupon.add(1);
+                    userInfo.coupon.add("welcome");
                     new FirebaseUtils().DatabaseInsert("User", userInfo.getUid(), userInfo);
                 }
 

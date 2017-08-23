@@ -494,7 +494,7 @@ public class BeaconScanService extends Service implements Runnable{
      *****************************************************************************************/
     void showBeaconPopupImage(final BleDeviceInfo item){
 
-        StorageReference islandRef = storageReference.child("Beacon/"+item.getDevAddress()+".jpg");
+        StorageReference islandRef = storageReference.child("Beacon/"+item.getDevAddress()+".JPG");
         final String DevAddress  = item.getDevAddress();
         final long ONE_MEGABYTE = 1024 * 1024;
 
