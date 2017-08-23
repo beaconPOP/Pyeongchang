@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
     FirebaseUser mUser;
     GoogleApiClient mGoogleApiClient;
     Context mContext;
+    Intent Service;
 
 
     protected void onStart() {
@@ -151,15 +152,16 @@ public class MainActivity extends AppCompatActivity
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     //TODO:Checked 되면 서비스 온
-
+                    startService(Service);
                     Values.bleService = new Intent(mContext, BleService.class);
                     startService(Values.bleService);
-                    Toast.makeText(getApplicationContext(), "비컨 탐색을 시작합니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "전체 서비스를 시작합니다.", Toast.LENGTH_SHORT).show();
 
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
                     stopBleService();
+                    stopService(Service);
+                    Toast.makeText(getApplicationContext(),"전체 서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -257,7 +259,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         //Beacon Scan Service Intent
-        Intent  Service = new Intent(this, BeaconScanService.class);
+        Service = new Intent(this, BeaconScanService.class);
 
         if (id == R.id.nav_map) {
             Intent intent = new Intent(this, GoogleMap.class);

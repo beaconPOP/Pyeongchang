@@ -422,15 +422,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    //TODO:Checked 되면 서비스 온
-
                     startService(bleService);
-                    Toast.makeText(getApplicationContext(), "비컨 탐색을 시작합니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "분실물 탐색 서비스를 시작합니다.", Toast.LENGTH_SHORT).show();
 
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
                     stopBleService();
+                    Toast.makeText(getApplicationContext(),"분실물 탐색 서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
                 }
             }
         });
