@@ -397,7 +397,7 @@ public class MainActivity extends AppCompatActivity
             View headerLayout = navigationView.getHeaderView(0);
             mEmail = (TextView) headerLayout.findViewById(R.id.slide_user_email);
             mName = (TextView) headerLayout.findViewById(R.id.slide_user_name);
-            mPoint = (TextView) headerLayout.findViewById(R.id.PointView);
+
 
 
             if (mEmail != null && mUser != null) {
@@ -414,6 +414,8 @@ public class MainActivity extends AppCompatActivity
             mBleScan = new BluetoothScan(this, mBleDeviceListAdapter, mBeaconsListAdapter);
             bleService = new Intent(this, BleService.class);
             startService(bleService);
+
+            Values.bleService=bleService;
 
             if (Values.useBLE)
                 mBleScan.checkBluetooth();
@@ -566,16 +568,24 @@ public class MainActivity extends AppCompatActivity
 
             } else if (id == R.id.nav_logout) {
 
+// 이전버전 로그인
+//                //Memory 비우기
+//                mHandler.removeMessages(0);
+//                mTimeOut.removeMessages(0);
+//                stopBleService();
+//                PictureList.clear();
+//
+//                //새 인텐트 불러오기
+//                signOut();
+//                Intent intent = new Intent(this, LoginActivity.class);
+//                startActivity(intent);
+//                finish();
 
-                //Memory 비우기
                 mHandler.removeMessages(0);
                 mTimeOut.removeMessages(0);
-                stopBleService();
                 PictureList.clear();
 
-                //새 인텐트 불러오기
-                signOut();
-                Intent intent = new Intent(this, LoginActivity.class);
+                Intent intent = new Intent(this, com.zerobin.www.beacon_client.MainActivity.class);
                 startActivity(intent);
                 finish();
 

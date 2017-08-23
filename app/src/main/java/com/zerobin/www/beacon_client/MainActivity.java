@@ -112,6 +112,13 @@ public class MainActivity extends AppCompatActivity
 
         initBluetoothAdapter();
 
+        //블루투스가 꺼져 있을 때 키도록 요청하는 코드
+        if(!mBluetoothAdapter.isEnabled())
+        {
+            Intent enableBtIntent  = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+
         //로그인시 db에 user정보가 등록되어 있다면 등록을 하지 않고,
         //등록되어 있지 않다면 user정보를 등록한다.
 
@@ -152,12 +159,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        //블루투스가 꺼져 있을 때 키도록 요청하는 코드
-        if(!mBluetoothAdapter.isEnabled())
-        {
-            Intent enableBtIntent  = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }
+
     }
 
     //Service와 통신하기 위하여 필요한 Connection!
@@ -278,6 +280,7 @@ public class MainActivity extends AppCompatActivity
 //            firebaseAuth.signOut();
 
             signOut();
+            stopBleService();
             Intent intent = new Intent(this, com.example.becomebeacon.beaconlocker.LoginActivity.class);
             startActivity(intent);
         }
@@ -285,6 +288,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void stopBleService() {
+        try {
+            if(com.example.becomebeacon.beaconlocker.Values.bleService!=null)
+                stopService(com.example.becomebeacon.beaconlocker.Values.bleService);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            Toast.makeText(getApplicationContext(), "오류가 발생했습니다. 관리자에게 문의하세요\n오류코드 : 50504", Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 
     private void signOut() {
