@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.view.View.VISIBLE;
+import static com.example.becomebeacon.beaconlocker.Values.lostItemToggle;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -104,6 +105,8 @@ public class MainActivity extends AppCompatActivity
     public ProgressDialog mainProgressDialog = null;
 
     private FloatingActionButton fab;
+
+    public Switch toggleSwitch;
 
 
     private boolean mScan;
@@ -260,6 +263,7 @@ public class MainActivity extends AppCompatActivity
             if (getSupportActionBar() != null) {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
+            setSupportActionBar(toolbar);
 
             Notifications.clear();
             BeaconList.refresh();
@@ -400,10 +404,6 @@ public class MainActivity extends AppCompatActivity
             bleService = new Intent(this, BleService.class);
 
 
-            startService(bleService);
-            Toast.makeText(getApplicationContext(), "비컨 탐색을 시작합니다.", Toast.LENGTH_SHORT).show();
-
-
 
             Values.bleService=bleService;
 
@@ -415,7 +415,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toggle, menu);
-        Switch toggleSwitch = (Switch)menu.findItem(R.id.action_switch_item).getActionView().findViewById(R.id.action_switch);
+        toggleSwitch = (Switch)menu.findItem(R.id.action_switch_item).getActionView().findViewById(R.id.action_switch);
+
+        if(lostItemToggle) {
+            toggleSwitch.setChecked(true);
+        } else {
+            toggleSwitch.setChecked(false);
+        }
 
         //Switch
         toggleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -423,11 +429,13 @@ public class MainActivity extends AppCompatActivity
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     startService(bleService);
-                    Toast.makeText(getApplicationContext(), "분실물 탐색 서비스를 시작합니다.", Toast.LENGTH_SHORT).show();
+                    lostItemToggle = true;
+                    Toast.makeText(getApplicationContext(), "분실물 탐색 서비스가 켜졌습니다.", Toast.LENGTH_SHORT).show();
 
                 }
                 else {
                     stopBleService();
+                    lostItemToggle = false;
                     Toast.makeText(getApplicationContext(),"분실물 탐색 서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
                 }
             }
