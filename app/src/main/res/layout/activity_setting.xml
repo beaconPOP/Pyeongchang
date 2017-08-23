@@ -28,7 +28,8 @@
             android:layout_alignBottom="@+id/textView11"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="18dp"
-            android:text="" />
+            android:text=""
+            android:theme="@style/MySwitch"/>
 
         <TextView
             android:id="@+id/textView11"
@@ -100,7 +101,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="20dp" />
+            android:layout_marginEnd="20dp"
+            android:theme="@style/MySwitch"/>
 
         <TextView
             android:id="@+id/textView15"

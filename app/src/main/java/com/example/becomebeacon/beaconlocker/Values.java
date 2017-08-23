@@ -26,4 +26,7 @@ public class Values {
     public static double longitude;
 
     public static Intent bleService;
+
+    public static boolean lostItemToggle = false;
+    public static boolean mainServicesToggle = false;
 }

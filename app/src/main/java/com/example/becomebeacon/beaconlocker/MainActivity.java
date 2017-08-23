@@ -1,6 +1,7 @@
 package com.example.becomebeacon.beaconlocker;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -23,9 +24,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +46,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.view.View.VISIBLE;
+import static com.example.becomebeacon.beaconlocker.Values.lostItemToggle;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -100,6 +105,8 @@ public class MainActivity extends AppCompatActivity
     public ProgressDialog mainProgressDialog = null;
 
     private FloatingActionButton fab;
+
+    public Switch toggleSwitch;
 
 
     private boolean mScan;
@@ -209,8 +216,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main_lostitem);
 
@@ -258,6 +263,7 @@ public class MainActivity extends AppCompatActivity
             if (getSupportActionBar() != null) {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
+            setSupportActionBar(toolbar);
 
             Notifications.clear();
             BeaconList.refresh();
@@ -379,7 +385,7 @@ public class MainActivity extends AppCompatActivity
             View headerLayout = navigationView.getHeaderView(0);
             mEmail = (TextView) headerLayout.findViewById(R.id.slide_user_email);
             mName = (TextView) headerLayout.findViewById(R.id.slide_user_name);
-            mPoint = (TextView) headerLayout.findViewById(R.id.PointView);
+
 
 
             if (mEmail != null && mUser != null) {
@@ -394,22 +400,50 @@ public class MainActivity extends AppCompatActivity
 
 
             mBleScan = new BluetoothScan(this, mBleDeviceListAdapter, mBeaconsListAdapter);
+
             bleService = new Intent(this, BleService.class);
-            startService(bleService);
+
+
 
             Values.bleService=bleService;
 
             if (Values.useBLE)
                 mBleScan.checkBluetooth();
             //이미지 파일 썩션
-
-
-
     }
 
-    public void setPoint(int p) {
-        mPoint.setText(BleService.myPoint + "");
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toggle, menu);
+        toggleSwitch = (Switch)menu.findItem(R.id.action_switch_item).getActionView().findViewById(R.id.action_switch);
+
+        if(lostItemToggle) {
+            toggleSwitch.setChecked(true);
+        } else {
+            toggleSwitch.setChecked(false);
+        }
+
+        //Switch
+        toggleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    startService(bleService);
+                    lostItemToggle = true;
+                    Toast.makeText(getApplicationContext(), "분실물 탐색 서비스가 켜졌습니다.", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    stopBleService();
+                    lostItemToggle = false;
+                    Toast.makeText(getApplicationContext(),"분실물 탐색 서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        return true;
     }
+
 
     private void initUI() {
         try {
@@ -424,6 +458,8 @@ public class MainActivity extends AppCompatActivity
             finish();
         }
     }
+
+
 
     public void stopBleService() {
         try {

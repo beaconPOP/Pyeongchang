@@ -36,7 +36,6 @@ public class BleService extends Service {
     private String TAG="BLESERVICE";
     private BluetoothScan mBleScan;
     private Location loc;
-    public static int myPoint ;
     private String myPointKey=null;
 
     private String FIND_OTHERS_NOTI;
@@ -89,7 +88,6 @@ public class BleService extends Service {
         mScan=false;
         mHandler.sendEmptyMessage(0);
         mTimeOut.sendEmptyMessage(0);
-        myPoint=0;
 
         mDatabase = FirebaseDatabase.getInstance();
 
@@ -149,33 +147,33 @@ public class BleService extends Service {
                         msg.keyValue=addressSnapshot.getKey();
 
 
-                        if(msg.isPoint)
-                        {
-                            if(msg.point<0) {//point 주는 msg는 음수로 온다
-                                addTotal -= msg.point;
-
-                                messageInfoRef.child(msg.keyValue).removeValue();
-
-
-                            }
-                            else {
-                                checkZeroPoint = false;
-                                if(myPoint<msg.point)
-                                    myPoint = msg.point;
-                                myPointKey=addressSnapshot.getKey();
-                            }
-                            msg.isChecked=true;
-
-
-
-                            //Point msg는 받고 삭제해야한다
-
-
-
-
-                        }
-                        else
-                        {
+//                        if(msg.isPoint)
+//                        {
+//                            if(msg.point<0) {//point 주는 msg는 음수로 온다
+//                                addTotal -= msg.point;
+//
+//                                messageInfoRef.child(msg.keyValue).removeValue();
+//
+//
+//                            }
+//                            else {
+//                                checkZeroPoint = false;
+//                                if(myPoint<msg.point)
+//                                    myPoint = msg.point;
+//                                myPointKey=addressSnapshot.getKey();
+//                            }
+//                            msg.isChecked=true;
+//
+//
+//
+//                            //Point msg는 받고 삭제해야한다
+//
+//
+//
+//
+//                        }
+//                        else
+//                        {
                             if(msg.isChecked==false) {
                                 if (BeaconList.mItemMap.containsKey(msg.devAddress)) {
                                     if (!BeaconList.msgMap.containsKey(addressSnapshot.getKey())) {
@@ -188,11 +186,11 @@ public class BleService extends Service {
 
                                 messageInfoRef.child(addressSnapshot.getKey()).setValue(msg);
 
-                                if(BeaconList.rewardMap.containsKey(msg.devAddress))
-                                {
-                                    BeaconList.rewardMap.remove(msg.devAddress);
-                                }
-                                BeaconList.rewardMap.put(msg.devAddress,msg.sendUid);
+//                                if(BeaconList.rewardMap.containsKey(msg.devAddress))
+//                                {
+//                                    BeaconList.rewardMap.remove(msg.devAddress);
+//                                }
+//                                BeaconList.rewardMap.put(msg.devAddress,msg.sendUid);
                             }
                             else
                             {
@@ -208,27 +206,26 @@ public class BleService extends Service {
                         }
 
                         //DB에 ischeck를 체크해줘야함
-                    }
+                    //}
 
-                    if(checkZeroPoint)
-                    {
-                        FindMessage fm=new FindMessage();
-                        fm.isPoint=true;
-                        fm.point=addTotal;
-
-                        messageInfoRef.push().setValue(fm);
-                        checkZeroPoint=false;
-                        myPoint=addTotal;
-
-                    }
-                    else
-                    {
-
-                        myPoint+=addTotal;
-                        GetMainActivity.getMainActity().setPoint(myPoint);
-
-                        //내 점수 setText 해줘야함 ㄹㅇ루
-                    }
+//                    if(checkZeroPoint)
+//                    {
+//                        FindMessage fm=new FindMessage();
+//                        fm.isPoint=true;
+//                        fm.point=addTotal;
+//
+//                        messageInfoRef.push().setValue(fm);
+//                        checkZeroPoint=false;
+//                        myPoint=addTotal;
+//
+//                    }
+//                    else
+//                    {
+//
+//                        myPoint+=addTotal;
+//                        GetMainActivity.getMainActity().setPoint(myPoint);
+//
+//                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "오류가 발생했습니다. 관리자에게 문의하세요\n오류코드 : 20103", Toast.LENGTH_LONG).show();
@@ -264,8 +261,6 @@ public class BleService extends Service {
 
         super.onDestroy();
 
-        if(myPointKey!=null)
-            messageInfoRef.child(myPointKey).child("point").setValue(myPoint);
 
     }
 

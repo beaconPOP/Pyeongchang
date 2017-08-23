@@ -116,10 +116,6 @@ public class ReadMessageActivity extends AppCompatActivity {
                 {
                     iter.remove();
                 }
-                else if(fm.isPoint)
-                {
-                    iter.remove();
-                }
             }
 
             if(op==1) {
@@ -296,6 +292,5 @@ public class ReadMessageActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "오류가 발생했습니다. 관리자에게 문의하세요\n오류코드 : 10710", Toast.LENGTH_LONG).show();
             finish();
         }
-
     }
 }

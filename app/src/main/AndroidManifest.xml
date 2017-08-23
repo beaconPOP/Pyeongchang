@@ -11,16 +11,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.zerobin.www.beacon_client.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
-
-
-
         <activity
-            android:name="com.example.becomebeacon.beaconlocker.LoginActivity"
+            android:name="com.zerobin.www.beacon_client.Intro"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +22,13 @@
         </activity>
 
 
-        <activity android:name="com.zerobin.www.beacon_client.Intro"></activity>
+        <activity android:name="com.zerobin.www.beacon_client.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+
+        <activity android:name="com.example.becomebeacon.beaconlocker.LoginActivity"></activity>
         <activity android:name="com.zerobin.www.beacon_client.GoogleMap"></activity>
         <activity android:name="com.zerobin.www.beacon_client.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">

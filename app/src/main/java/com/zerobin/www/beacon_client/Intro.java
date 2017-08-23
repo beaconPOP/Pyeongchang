@@ -23,7 +23,7 @@ public class Intro extends Activity {
             public void run() {
                 try {
                     Thread.sleep(2000);
-                    Intent i = new Intent(Intro.this, LoginActivity.class);
+                    Intent i = new Intent(Intro.this, com.example.becomebeacon.beaconlocker.LoginActivity.class);
                     startActivity(i);
                     finish(); // Activity 종료
                 }catch(Exception ignore) {}

@@ -1,10 +1,12 @@
 <resources>
-    <string name="app_name">스마트 서문시장</string>
+    <string name="app_name">Beacon POP!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_bluetooth_adapter">BluetoothAdapter</string>
+
+    <string name="action_switch"></string>
 
     <string name="unknown">Unknown</string>
     <string name="password_guide">Plase input authentication password</string>
