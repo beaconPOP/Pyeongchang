@@ -20,7 +20,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.beaconpop.pyeongchang.R;
@@ -80,6 +83,21 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Switch toggleSwitch = (Switch)findViewById(R.id.action_switch);
+        toggleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    //TODO:Checked 되면 서비스 온
+                    Toast.makeText(getApplicationContext(),"On",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //TODO:UnChecked 되면 서비스 오프
+                    Toast.makeText(getApplicationContext(),"Off",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         mAuth = LoginActivity.getAuth();
         mUser = LoginActivity.getUser();
 
@@ -123,6 +141,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toggle, menu);
+        return true;
     }
 
     @Override

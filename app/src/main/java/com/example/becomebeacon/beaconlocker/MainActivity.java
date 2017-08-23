@@ -23,9 +23,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -219,6 +222,21 @@ public class MainActivity extends AppCompatActivity
             mainProgressDialog.setMessage("목록을 불러오는 중...");
             mainProgressDialog.show();
 
+            Switch toggleSwitch = (Switch)findViewById(R.id.action_switch);
+            toggleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked) {
+                        //TODO:Checked 되면 서비스 온
+                        Toast.makeText(getApplicationContext(),"On",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        //TODO:UnChecked 되면 서비스 오프
+                        Toast.makeText(getApplicationContext(),"Off",Toast.LENGTH_SHORT).show();
+                    }
+               }
+            });
+
             initUI();
 
             int result1 = new PermissionRequester.Builder(MainActivity.this)
@@ -400,9 +418,12 @@ public class MainActivity extends AppCompatActivity
             if (Values.useBLE)
                 mBleScan.checkBluetooth();
             //이미지 파일 썩션
+    }
 
-
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toggle, menu);
+        return true;
     }
 
     public void setPoint(int p) {

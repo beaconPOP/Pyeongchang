@@ -107,6 +107,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "558753922013-jo94keltl66426qv1mq73jj8hgm6j5og.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beaconpop.pyeongchang",
+            "certificate_hash": "6c6eb8bbe813e9a73b3478d75db5089bd3124266"
+          }
+        },
+        {
           "client_id": "558753922013-hce6kr63u125b490hjqhvufq7a9h552c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -128,14 +136,6 @@
           "android_info": {
             "package_name": "com.beaconpop.pyeongchang",
             "certificate_hash": "3a17f13e9c83d18cf74b8d4d84063a4c83ef7da4"
-          }
-        },
-        {
-          "client_id": "558753922013-f2ir8rthas984hq9d1nu8cgvb1q4v6v5.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.beaconpop.pyeongchang",
-            "certificate_hash": "b0feb5ae187d2f65f161fbc0404f9210d55bfb66"
           }
         },
         {
