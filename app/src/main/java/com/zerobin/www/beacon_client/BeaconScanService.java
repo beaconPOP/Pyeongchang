@@ -503,14 +503,18 @@ public class BeaconScanService extends Service implements Runnable{
             public void onSuccess(byte[] bytes) { //다운로드 성공시 이미지를 byte[]로 리턴
                 // Data for "images/island.jpg" is returns, use this as needed
 
-                Log.i("onSuccess", DevAddress);
-                Intent popupIntent = new Intent(BeaconScanService.this, PopupActivity.class);
-                popupIntent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK);
-                popupIntent.putExtra("textBdAddress", DevAddress);
-                popupIntent.putExtra("image", bytes); //다운로드한 byte[] 이미지
+                try {
+                    Log.i("onSuccess", DevAddress);
+                    Intent popupIntent = new Intent(BeaconScanService.this, PopupActivity.class);
+                    popupIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    popupIntent.putExtra("textBdAddress", DevAddress);
+                    popupIntent.putExtra("image", bytes); //다운로드한 byte[] 이미지
 
-                //Log.i("팝업이 뜬 비컨 Address", "--------------------------" +item.devAddress);
-                startActivity(popupIntent);
+                    //Log.i("팝업이 뜬 비컨 Address", "--------------------------" +item.devAddress);
+                    startActivity(popupIntent);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
                 //Toast.makeText(BeaconScanService.this, DevAddress, Toast.LENGTH_SHORT).show();
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -40,7 +41,7 @@ public class PopupActivity extends Activity implements View.OnClickListener {
     String textBdAddress, beaconContenTitle, couponKey, userUid;
     Bitmap bitmapImage;
     byte[] byteImage;
-    Button image_save_btn;
+    Button image_save_btn, connect_webpage;
     boolean return_value;
     List<Object> couponList;
 
@@ -56,8 +57,12 @@ public class PopupActivity extends Activity implements View.OnClickListener {
         contentImageView = (ImageView) findViewById(R.id.contentImageView);
         image_save_btn = (Button) findViewById(R.id.image_save_btn);
         image_save_btn.setOnClickListener(this);
+        connect_webpage = (Button) findViewById(R.id.connect_webpage);
+        connect_webpage.setOnClickListener(this);
         //textView = (TextView) findViewById(R.id.deviceAddress);
 
+
+        try {
         //선택된 비컨 주소 받아오기
         Intent intent = getIntent();
         textBdAddress = intent.getExtras().getString("textBdAddress");
@@ -66,7 +71,6 @@ public class PopupActivity extends Activity implements View.OnClickListener {
         bitmapImage = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
         contentImageView.setImageBitmap(bitmapImage);
 
-        try {
             DatabaseReference myRef = databaseReference.child("Beacon").child(textBdAddress);
             Log.i("myRef", myRef + "");
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -102,6 +106,10 @@ public class PopupActivity extends Activity implements View.OnClickListener {
             case R.id.image_save_btn:
                 uploadImage();
                 break;
+            case R.id.connect_webpage:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.pyeongchang2018.com/ko/index"));
+                startActivity(intent);
             default:
         }
     }
