@@ -281,14 +281,14 @@ public class BeaconDetailsActivity extends AppCompatActivity {
 
                     BleService.mContext.findStuff(item);
 
-                    if(BeaconList.rewardMap.containsKey(item.devAddress)) {
-                        FindMessage fm=new FindMessage();
-                        fm.isPoint=true;
-                        fm.point=-Values.REWARD_POINT;
-                        mDatabase.getReference("users/" + BeaconList.rewardMap.get(item.devAddress)).child("messages")
-                                .push().setValue(fm);
-
-                    }
+//                    if(BeaconList.rewardMap.containsKey(item.devAddress)) {
+//                        FindMessage fm=new FindMessage();
+//                        fm.isPoint=true;
+//                        fm.point=-Values.REWARD_POINT;
+//                        mDatabase.getReference("users/" + BeaconList.rewardMap.get(item.devAddress)).child("messages")
+//                                .push().setValue(fm);
+//
+//                    }
 
 
                     Toast.makeText(getApplicationContext(),"회수처리 하였습니다.",Toast.LENGTH_SHORT).show();

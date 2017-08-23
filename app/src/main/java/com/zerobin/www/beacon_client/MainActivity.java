@@ -94,6 +94,13 @@ public class MainActivity extends AppCompatActivity
 
         initBluetoothAdapter();
 
+        //블루투스가 꺼져 있을 때 키도록 요청하는 코드
+        if(!mBluetoothAdapter.isEnabled())
+        {
+            Intent enableBtIntent  = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+
         //로그인시 db에 user정보가 등록되어 있다면 등록을 하지 않고,
         //등록되어 있지 않다면 user정보를 등록한다.
 
@@ -128,12 +135,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        //블루투스가 꺼져 있을 때 키도록 요청하는 코드
-        if(!mBluetoothAdapter.isEnabled())
-        {
-            Intent enableBtIntent  = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }
+
     }
 
     //Service와 통신하기 위하여 필요한 Connection!

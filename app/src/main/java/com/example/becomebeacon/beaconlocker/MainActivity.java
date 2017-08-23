@@ -379,7 +379,7 @@ public class MainActivity extends AppCompatActivity
             View headerLayout = navigationView.getHeaderView(0);
             mEmail = (TextView) headerLayout.findViewById(R.id.slide_user_email);
             mName = (TextView) headerLayout.findViewById(R.id.slide_user_name);
-            mPoint = (TextView) headerLayout.findViewById(R.id.PointView);
+
 
 
             if (mEmail != null && mUser != null) {
