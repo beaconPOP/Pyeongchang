@@ -83,21 +83,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Switch toggleSwitch = (Switch)findViewById(R.id.action_switch);
-        toggleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    //TODO:Checked 되면 서비스 온
-                    Toast.makeText(getApplicationContext(),"On",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    //TODO:UnChecked 되면 서비스 오프
-                    Toast.makeText(getApplicationContext(),"Off",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
         mAuth = LoginActivity.getAuth();
         mUser = LoginActivity.getUser();
 
@@ -147,12 +132,28 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "저장되어 있지 않다",Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toggle, menu);
+        Switch toggleSwitch = (Switch)menu.findItem(R.id.action_switch_item).getActionView().findViewById(R.id.action_switch);
+
+        //Switch
+        toggleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    //TODO:Checked 되면 서비스 온
+                    Toast.makeText(getApplicationContext(),"비컨 탐색을 시작합니다.",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //TODO:UnChecked 되면 서비스 오프
+                    Toast.makeText(getApplicationContext(),"서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         return true;
     }
 
