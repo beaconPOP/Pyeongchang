@@ -140,16 +140,6 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    public boolean isServiceRunningCheck() {
-        ActivityManager manager = (ActivityManager) this.getSystemService(Activity.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if ("com.example.becomebeacon.beaconlocker.BleService".equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toggle, menu);
@@ -161,11 +151,11 @@ public class MainActivity extends AppCompatActivity
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     //TODO:Checked 되면 서비스 온
-                    if(!isServiceRunningCheck()) {
-                        Values.bleService = new Intent(mContext, BleService.class);
-                        startService(Values.bleService);
-                        Toast.makeText(getApplicationContext(), "비컨 탐색을 시작합니다.", Toast.LENGTH_SHORT).show();
-                    }
+
+                    Values.bleService = new Intent(mContext, BleService.class);
+                    startService(Values.bleService);
+                    Toast.makeText(getApplicationContext(), "비컨 탐색을 시작합니다.", Toast.LENGTH_SHORT).show();
+
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"서비스가 꺼졌습니다.",Toast.LENGTH_SHORT).show();

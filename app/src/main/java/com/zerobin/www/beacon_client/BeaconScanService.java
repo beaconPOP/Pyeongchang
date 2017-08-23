@@ -78,6 +78,8 @@ public class BeaconScanService extends Service implements Runnable{
 
     //private Handler mHandler;
     boolean mScanning;
+    static int num=0;
+    int myNum;
 
     /*
         Widgets
@@ -98,7 +100,8 @@ public class BeaconScanService extends Service implements Runnable{
         mBleUtils = new BleUtils(); //거리 계산을 위한 인스턴스 생성
         mArrayListBleDevice = new ArrayList<BleDeviceInfo>(); //비컨 정보를 담을 클래스 arrayList생성
         isService = true;
-        Log.i("service ", " "+ "onCreate " + isService );
+        myNum=num++;
+        Log.i("service ", " "+ "onCreate " + isService +" "+myNum);
         mHandler.sendEmptyMessageDelayed(0, SCAN_PERIOD);
         mTimeOut.sendEmptyMessageDelayed(0, TIMEOUT_PERIOD);
 
@@ -127,7 +130,7 @@ public class BeaconScanService extends Service implements Runnable{
         myThread = new Thread(this);
         myThread.start();
 
-        Log.i("service ", " "+ "onStartCommand");
+        Log.i("service ", " "+ "onStartCommand "+myNum);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -141,7 +144,7 @@ public class BeaconScanService extends Service implements Runnable{
         if(mTimeOut != null){
             mTimeOut.removeMessages(0);
         }
-        Log.i("service ", " "+ "onDestroy");
+        Log.i("service ", " "+ "onDestroy "+myNum);
 
     }
 
