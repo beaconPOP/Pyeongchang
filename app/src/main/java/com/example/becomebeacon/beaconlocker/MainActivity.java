@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        try {
+
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main_lostitem);
 
@@ -245,10 +245,9 @@ public class MainActivity extends AppCompatActivity
 
             }
 
-
             //툴바 세팅
             toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+            //setSupportActionBar(toolbar);
 
             toolbar.setTitle(R.string.app_name);
             toolbar.setSubtitle("내 기기 목록");
@@ -393,18 +392,18 @@ public class MainActivity extends AppCompatActivity
                 mName.setText(mUser.getDisplayName());
             }
 
+
             mBleScan = new BluetoothScan(this, mBleDeviceListAdapter, mBeaconsListAdapter);
             bleService = new Intent(this, BleService.class);
             startService(bleService);
 
+            Values.bleService=bleService;
+
             if (Values.useBLE)
                 mBleScan.checkBluetooth();
             //이미지 파일 썩션
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "오류가 발생했습니다. 관리자에게 문의하세요\n오류코드 : 10500", Toast.LENGTH_LONG).show();
-            finish();
-        }
+
+
 
     }
 
@@ -548,16 +547,24 @@ public class MainActivity extends AppCompatActivity
 
             } else if (id == R.id.nav_logout) {
 
+// 이전버전 로그인
+//                //Memory 비우기
+//                mHandler.removeMessages(0);
+//                mTimeOut.removeMessages(0);
+//                stopBleService();
+//                PictureList.clear();
+//
+//                //새 인텐트 불러오기
+//                signOut();
+//                Intent intent = new Intent(this, LoginActivity.class);
+//                startActivity(intent);
+//                finish();
 
-                //Memory 비우기
                 mHandler.removeMessages(0);
                 mTimeOut.removeMessages(0);
-                stopBleService();
                 PictureList.clear();
 
-                //새 인텐트 불러오기
-                signOut();
-                Intent intent = new Intent(this, LoginActivity.class);
+                Intent intent = new Intent(this, com.zerobin.www.beacon_client.MainActivity.class);
                 startActivity(intent);
                 finish();
 

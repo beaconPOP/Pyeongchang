@@ -115,7 +115,7 @@ public class BluetoothScan {
     }
 
 
-    BluetoothScan(MainActivity ma, BleDeviceListAdapter bdla, MyBeaconsListAdapter mbla) throws Exception
+    BluetoothScan(MainActivity ma, BleDeviceListAdapter bdla, MyBeaconsListAdapter mbla)
     {
 
         mActivity=ma;
@@ -149,11 +149,11 @@ public class BluetoothScan {
     }
 
 
-    protected void onDestory() throws Exception{
+    protected void onDestory()  {
         mBluetoothAdapter.stopLeScan(mLeScanCallback);
     }
 
-    public boolean getDeviceState()  throws Exception{
+    public boolean getDeviceState()   {
 
         if(mBluetoothAdapter == null) {
             return false;
@@ -162,12 +162,12 @@ public class BluetoothScan {
         }
     }
 
-    public boolean isBleOn() throws Exception
+    public boolean isBleOn()
     {
         return mBluetoothAdapter.isEnabled();
     }
 
-    public void enableBluetooth() throws Exception
+    public void enableBluetooth()
     {
         if(mBluetoothAdapter.isEnabled())
         {
@@ -180,7 +180,7 @@ public class BluetoothScan {
         }
     }
 
-    public void checkBluetooth() throws Exception
+    public void checkBluetooth()
     {
         if(getDeviceState()) {
             // 블루투스가 지원 가능한 기기일 때
@@ -190,7 +190,7 @@ public class BluetoothScan {
         }
     }
 
-    public void getBleDeviceInfoFromLeScan(BluetoothDevice device, int rssi, byte[] scanRecord)  throws Exception{
+    public void getBleDeviceInfoFromLeScan(BluetoothDevice device, int rssi, byte[] scanRecord)   {
         String devName;
         String devAddress;
         String scanRecordAsHex;     // 24byte

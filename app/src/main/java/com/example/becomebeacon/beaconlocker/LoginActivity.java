@@ -2,6 +2,7 @@ package com.example.becomebeacon.beaconlocker;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,6 +27,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import com.zerobin.www.beacon_client.*;
+
+
 
 public class LoginActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -203,7 +208,14 @@ public class LoginActivity extends AppCompatActivity implements
     private void updateUI(FirebaseUser user) {
         try {
             if (user != null) {
-                Intent intent = new Intent(this, MainActivity.class);
+
+                SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("userUid", getUser().getUid());
+                editor.putString("userEmail", getUser().getEmail());
+                editor.apply();
+
+                Intent intent = new Intent(this,com.zerobin.www.beacon_client.MainActivity.class);
                 startActivity(intent);
                 finish();
 

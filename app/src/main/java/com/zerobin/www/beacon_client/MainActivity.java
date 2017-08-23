@@ -1,5 +1,6 @@
 package com.zerobin.www.beacon_client;
 
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.ComponentName;
@@ -23,6 +24,15 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.beaconpop.pyeongchang.R;
+import com.example.becomebeacon.beaconlocker.*;
+import com.example.becomebeacon.beaconlocker.LoginActivity;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +47,30 @@ public class MainActivity extends AppCompatActivity
     private static final int REQUEST_ENABLE_BT = 1;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1001;
     String userUid, userEmail;
+    FirebaseAuth mAuth;
+    FirebaseUser mUser;
+    GoogleApiClient mGoogleApiClient;
+
+
+    protected void onStart() {
+        try {
+            super.onStart();
+
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build();
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    .build();
+            mGoogleApiClient.connect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            Toast.makeText(getApplicationContext(), "오류가 발생했습니다. 관리자에게 문의하세요\n오류코드 : 40505", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +79,9 @@ public class MainActivity extends AppCompatActivity
         checkPermission();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuth = LoginActivity.getAuth();
+        mUser = LoginActivity.getUser();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -197,9 +234,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_coupon) {
                 Intent intent = new Intent(this, CuponActivity.class);
                 startActivity(intent);
-            } else if (id == R.id.nav_welcoom) {
-//                Intent intent = new Intent(this, IntroduceMarket.class);
-//                startActivity(intent);
+            } else if (id == R.id.nav_prevention) {
+                Intent intent = new Intent(this, com.example.becomebeacon.beaconlocker.MainActivity.class);
+                startActivity(intent);
 
             } else if(id == R.id.background_on){  //백그라운드 기능 활성화 시 비컨 스캔 Service 시작
 //            startService(Service);
@@ -216,7 +253,9 @@ public class MainActivity extends AppCompatActivity
 //            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 //            firebaseAuth.signOut();
 
-            Intent intent = new Intent(this, LoginActivity.class);
+            signOut();
+            stopBleService();
+            Intent intent = new Intent(this, com.example.becomebeacon.beaconlocker.LoginActivity.class);
             startActivity(intent);
         }
 
@@ -225,6 +264,37 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public void stopBleService() {
+        try {
+            if(com.example.becomebeacon.beaconlocker.Values.bleService!=null)
+                stopService(com.example.becomebeacon.beaconlocker.Values.bleService);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            Toast.makeText(getApplicationContext(), "오류가 발생했습니다. 관리자에게 문의하세요\n오류코드 : 50504", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+
+    private void signOut() {
+        try {
+            mAuth.signOut();
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                    new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+                            // ...
+                            Toast.makeText(getApplicationContext(), "Logged Out", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            Toast.makeText(getApplicationContext(), "오류가 발생했습니다. 관리자에게 문의하세요\n오류코드 : 10509", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
 
     //안드로이드 버전 6.0 이상부터 어떤 권한들은 앱 안에서 사용 승인을 받아야 한다.
     //이 때 필요한 코드이다.

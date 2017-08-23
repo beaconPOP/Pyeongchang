@@ -28,15 +28,15 @@ public class PermissionRequester {
     private Activity context;
     private Builder builder;
 
-    private void setBuilder(Builder builder) throws Exception {
+    private void setBuilder(Builder builder)   {
         this.builder = builder;
     }
 
-    private PermissionRequester(Activity context)throws Exception {
+    private PermissionRequester(Activity context)  {
         this.context = context;
     }
 
-    public int request(final String permission, final int requestCode, final OnClickDenyButtonListener denyAction) throws Exception{
+    public int request(final String permission, final int requestCode, final OnClickDenyButtonListener denyAction){
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             /*
@@ -117,7 +117,7 @@ public class PermissionRequester {
 
         private PermissionRequester requester;
 
-        public Builder(Activity context) throws Exception {
+        public Builder(Activity context) {
             requester = new PermissionRequester(context);
         }
 
@@ -126,43 +126,43 @@ public class PermissionRequester {
         private String positiveButtonName = "네";
         private String negativeButtonName = "아니요";
 
-        public String getTitle()throws Exception {
+        public String getTitle(){
             return title;
         }
 
-        public Builder setTitle(String title)throws Exception {
+        public Builder setTitle(String title){
             this.title = title;
             return this;
         }
 
-        public String getMessage()throws Exception {
+        public String getMessage(){
             return message;
         }
 
-        public Builder setMessage(String message) throws Exception{
+        public Builder setMessage(String message){
             this.message = message;
             return this;
         }
 
-        public String getPositiveButtonName()throws Exception {
+        public String getPositiveButtonName(){
             return positiveButtonName;
         }
 
-        public Builder setPositiveButtonName(String positiveButtonName) throws Exception{
+        public Builder setPositiveButtonName(String positiveButtonName) {
             this.positiveButtonName = positiveButtonName;
             return this;
         }
 
-        public String getNegativeButtonName()throws Exception {
+        public String getNegativeButtonName(){
             return negativeButtonName;
         }
 
-        public Builder setNegativeButtonName(String negativeButtonName)throws Exception {
+        public Builder setNegativeButtonName(String negativeButtonName)  {
             this.negativeButtonName = negativeButtonName;
             return this;
         }
 
-        public PermissionRequester create()throws Exception {
+        public PermissionRequester create()  {
             this.requester.setBuilder(this);
             return this.requester;
         }
