@@ -60,7 +60,6 @@ public class BeaconScanService extends Service implements Runnable{
     int beaconType;
     int stampBeaconNumber;
     private String userUid;
-    int stampList;
 
     ///////////
     private static final long SCAN_PERIOD = 1000;       // 10초동안 SCAN 과정을 수행함
@@ -483,6 +482,7 @@ public class BeaconScanService extends Service implements Runnable{
 //                Toast.makeText(getApplicationContext(), "BeaconType 3! 에러발생", Toast.LENGTH_SHORT).show();
 //            }
 
+           // Log.i("beaconType", "----------------------------------- " + beaconType);
             showBeaconPopupImage(item);
             bringStampList();
         }
@@ -538,44 +538,63 @@ public class BeaconScanService extends Service implements Runnable{
             DatabaseReference myRef = databaseReference.child("User").child(userUid).child("stamplist");
             Log.i("stampList", "************** "+userUid+ "bringStampList" );
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     try {
-                        stampList = Integer.parseInt(dataSnapshot.getValue().toString());
+                        Stamp userStamp;
+//                        stampList = Integer.parseInt(dataSnapshot.getValue().toString());
+                        userStamp = dataSnapshot.getValue(Stamp.class);
 
-                        Log.i("stampList", "**************  "+stampList);
-                        //받은 스탬프 넘버를 더하는 알고리즘 (중복 저장 방지)
-                        if(stampBeaconNumber == 1 && (stampList % 10) == 1) {
-                            stampList = stampList + 1;
-                            Log.i("stampList", "**************  " + stampList);
-                        }
-                        else if(stampBeaconNumber == 2 && (stampList % 100) < 20) {
-                            stampList = stampList + 10;
-                            Log.i("stampList", "**************  " + stampList);
-                        }
-                        else if(stampBeaconNumber == 3 && (stampList % 1000) < 200) {
-                            stampList = stampList + 100;
-                            Log.i("stampList", "**************  " + stampList);
-                        }
-                        else if(stampBeaconNumber == 4 && (stampList % 10000) < 2000) {
-                            stampList = stampList + 1000;
-                            Log.i("stampList", "**************  " + stampList);
-                        }
-                        else if(stampBeaconNumber == 5 && (stampList % 100000) < 20000) {
-                            stampList = stampList + 10000;
-                            Log.i("stampList", "**************  " + stampList);
-                        }
-                        else if(stampBeaconNumber == 6 && (stampList) < 200000) {
-                            stampList = stampList + 100000;
-                            Log.i("stampList", "**************  " + stampList);
+                        switch (stampBeaconNumber){
+                            case 1:
+                                userStamp.setStamp1(1);
+                                break;
+                            case 2:
+                                userStamp.setStamp2(2);
+                                break;
+                            case 3:
+                                userStamp.setStamp3(3);
+                                break;
+                            case 4:
+                                userStamp.setStamp4(4);
+                                break;
+                            case 5:
+                                userStamp.setStamp5(5);
+                                break;
+                            case 6:
+                                userStamp.setStamp6(6);
+                                break;
+                            case 7:
+                                userStamp.setStamp7(7);
+                                break;
+                            case 8:
+                                userStamp.setStamp8(8);
+                                break;
+                            case 9:
+                                userStamp.setStamp9(9);
+                                break;
+                            case 10:
+                                userStamp.setStamp10(10);
+                                break;
+                            case 11:
+                                userStamp.setStamp11(11);
+                                break;
+                            case 12:
+                                userStamp.setStamp12(12);
+                                break;
+                            case 13:
+                                userStamp.setStamp13(13);
+                                break;
+                            default:
+                                userStamp.setStamp1(1);
+
                         }
 
-                        //임시처리 스탬프 번호를 받아왔을때만 실행한다.
-                        if(stampBeaconNumber != 0) {
-                            //더한 stampList를 파이어베이스 서버에 저장하는 함수
-                            DatabaseReference myRef = databaseReference.child("User").child(userUid).child("stamplist");
-                            myRef.setValue(stampList);
+                            //임시처리, 스탬프 번호를 받아왔을때만 실행한다.
+                            if(stampBeaconNumber != 0) {
+                                //더한 stampList를 파이어베이스 서버에 저장하는 함수
+                                DatabaseReference myRef = databaseReference.child("User").child(userUid).child("stamplist");
+                                myRef.setValue(userStamp);
 //                       //Log.i("beaconType", "**********************"+beaconType);
 
                             //Stamp획득시 notification 알림!
@@ -600,9 +619,10 @@ public class BeaconScanService extends Service implements Runnable{
 
                     }catch (Exception e){ //받은 비컨의 Address가 파이어베이스 서버에 저장되어 있지 않은경우 예외가 발생할 수 있다.
                         e.printStackTrace();
-                        int init = 111111;
+                        Log.i("beaconTypeee", "----------------------------------- " + beaconType);
+                        Stamp stamp = new Stamp();
                         DatabaseReference myRef = databaseReference.child("User").child(userUid).child("stamplist");
-                        myRef.setValue(init);
+                        myRef.setValue(stamp);
                     }
                 }
                 @Override
