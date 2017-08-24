@@ -20,7 +20,7 @@
                 android:layout_height="180dp"
                 android:src="@drawable/stamp_1" />
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/stamp2"
                 android:src="@drawable/stamp_2"/>
@@ -32,48 +32,48 @@
                 android:src="@drawable/stamp_3" />
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/stamp4"
                 android:src="@drawable/stamp_4"/>
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/stamp5"
                 android:src="@drawable/stamp_5"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/stamp6"
                 android:src="@drawable/stamp_6"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/stamp7"
                 android:src="@drawable/stamp_7"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/stamp8"
                 android:src="@drawable/stamp_8"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/stamp9"
                 android:src="@drawable/stamp_9"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/stamp10"
                 android:src="@drawable/stamp_10"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/stamp11"
                 android:src="@drawable/stamp_11"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/stamp12"
                 android:src="@drawable/stamp_12"/>
@@ -83,6 +83,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="180dp"
                 android:src="@drawable/stamp_13" />
+
+
+
 
         </LinearLayout>
     </ScrollView>
